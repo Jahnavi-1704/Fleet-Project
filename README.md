@@ -18,5 +18,3 @@
          3. Then start the frontend by running the command 'npm start' in the project's root directory (web opens at http://localhost:3000)
          
          There you go, my app will get running in no time!!
-         
-## I have deployed this app on Heroku. The link to it is: 
