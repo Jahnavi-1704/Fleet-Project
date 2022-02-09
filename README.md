@@ -1,6 +1,6 @@
 # This is my Fleet project
 
-## I built it using the following tech stack - 
+## I built it using the following Tech stack - 
          1. React for Frontend (Additionally, used BootStrap 4 and FontAwesomeIcon for styling)
          2. Node and Express for Backend
          3. MongoDB as Database
@@ -12,7 +12,7 @@
          - User can search for a service by company name and the mode type
          - User can also update/edit a specific company's website and description
          
-## To run the app:
+## To Run the app:
          1. First go into the backend folder using command 'cd backend' 
          2. Next start the server using command 'nodemon server' (server opens at http://localhost:5000)
          3. Then start the frontend by running the command 'npm start' in the project's root directory (web opens at http://localhost:3000)
