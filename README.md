@@ -11,6 +11,10 @@
          - The frontend then groups the data by company name and displays it to user in the form of cards
          - User can search for a service by company name and the mode type
          - User can also update/edit a specific company's website and description
+        
+## Directory Structure:
+         - The Backend code is under the backend folder (server.js is the main file there)
+         - The frontend code is under the src folder (App.js is the main file there)
          
 ## To Run the app:
          1. First go into the backend folder using command 'cd backend' 
