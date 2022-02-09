@@ -17,7 +17,8 @@
          - The frontend code is under the src folder (App.js is the main file there)
          
 ## To Run the app:
-         1. First go into the backend folder using command 'cd backend' 
+         1. First in the project directory, run command "npm install"
+         1. Then go into the backend folder using command 'cd backend' 
          2. Next start the server using command 'nodemon server' (server opens at http://localhost:5000)
          3. Then start the frontend by running the command 'npm start' in the project's root directory (web opens at http://localhost:3000)
          
