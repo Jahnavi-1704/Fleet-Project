@@ -14,7 +14,7 @@
         
 ## Directory Structure:
          - The Backend code is under the backend folder (server.js is the main file there)
-         - The frontend code is under the src folder (App.js is the main file there)
+         - The Frontend code is under the src folder (App.js is the main file there)
          
 ## To Run the app:
          1. First in the project directory, run command "npm install"
