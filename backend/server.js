@@ -167,10 +167,17 @@ app.route('/companies/:companyName').put (async (req, res) => {
     // console.log('new website: ' + updatedWebsite);
     // console.log('new description: ' + updatedDesc);
 
-    const hello = await Company.updateMany({name: {$eq: name}}, { website: updatedWebsite, description: updatedDesc } );
-    console.log(hello.matchedCount);
-    console.log(hello.modifiedCount);
-    console.log(hello.acknowledged);
+    Company.updateMany({name: {$eq: name}}, { website: updatedWebsite, description: updatedDesc })
+        .then(companies => res.json(companies))
+        .catch(err => {
+            console.log('error in backend is: ' + err);
+            res.status(400).json('Error: ' + err);
+        });
+
+    // const updation = await Company.updateMany({name: {$eq: name}}, { website: updatedWebsite, description: updatedDesc } );
+    // console.log(updation.matchedCount);
+    // console.log(updation.modifiedCount);
+    // console.log(updation.acknowledged);
 
 });
 

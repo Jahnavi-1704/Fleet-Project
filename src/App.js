@@ -15,14 +15,11 @@ function App() {
     const [description, setDescription] = useState(null);
     const [searchValue, setSearchValue] = useState(null);
     const [searchData, setSearchData] = useState([]);
-    const [refresh, setRefresh] = useState(true);
-
 
     useEffect(() => {
         console.log('inside componentDidMount()');
-        console.log('fetch the data again');
         getData();
-    }, [refresh]);
+    }, []);
 
     const getData = async () => {
         console.log('inside getData()');
@@ -36,11 +33,10 @@ function App() {
                 console.log(json);
                 fetchedData = json;
                 console.log(fetchedData.length);
-                setData(fetchedData);
             })
             .catch(err => console.log('error fetching data: '+ err));
 
-        // group the repeated instances of data into single
+        // combine the repeated instances of company into single instance
         groupData(fetchedData, fetchedData.length);
     }
 
@@ -48,7 +44,7 @@ function App() {
         console.log('inside groupData()');
         console.log('before grouping length is: ' + length);
 
-        console.log('is data a array of objs? : ' + Array.isArray(list));
+        // console.log('is data an array of objs? : ' + Array.isArray(list));
 
         let index = list.findIndex((element) => element.name == 'Wheels');
         console.log(index);
@@ -57,24 +53,21 @@ function App() {
         for(let i=0;i<length;i++)
         {
             let index1 = newArray.findIndex((element) => element.name == list[i].name);
-            console.log(index1);
+            // console.log(index1);
 
             if(index1 == -1)
             {
-                console.log('its a new element');
+                // console.log('its a new element');
                 let modeArray = [];
                 modeArray.push(list[i].modeType);
                 list[i].modeType = modeArray;
                 newArray.push(list[i]);
-                let index2 = newArray.findIndex((element) => element.name == list[i].name);
-                console.log('22: ' + newArray[index2].modeType);
             }
             else {
-                console.log('its a repeated element with different modeType');
+                // console.log('its a repeated element with different modeType');
                 let newModeArray = newArray[index1].modeType;
                 newModeArray.push(list[i].modeType);
                 newArray[index1].modeType = newModeArray;
-                console.log('33: ' + newArray[index1].modeType);
             }
 
         }
@@ -92,6 +85,7 @@ function App() {
         setWebsite(data[index].website);
         setDescription(data[index].description);
         setName(data[index].name);
+
         setModalOpen(true);
     }
 
@@ -118,10 +112,11 @@ function App() {
             })
         })
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(json =>  console.log(json))
             .catch(err => console.log('error updating data: '+ err));
 
-        setRefresh(!refresh);
+        // fetch the updated data from DB to display
+        getData();
     }
 
     const updateWebsite = (event) => {
@@ -150,7 +145,7 @@ function App() {
             let lowerValue = value.toLowerCase();
             if(lowerName.includes(lowerValue))
             {
-                console.log('found value in name');
+                // console.log('found value in name');
                 return true;
             }
 
@@ -158,7 +153,7 @@ function App() {
             let index = modeArray.findIndex(transport => transport.toLowerCase().includes(lowerValue));
             if(index != -1)
             {
-                console.log('found value in modeType array');
+                // console.log('found value in modeType array');
                 return true;
             }
 
@@ -171,7 +166,7 @@ function App() {
 
     const modeTypeSeparator = (modeType) => {
         console.log('inside modeTypeSeparator()');
-        console.log('combined string is: ' + modeType);
+        // console.log('combined string is: ' + modeType);
 
         let length = modeType.length;
         let string;
@@ -187,7 +182,7 @@ function App() {
 
         }
 
-        console.log('separated string is: ' + string);
+        // console.log('separated string is: ' + string);
         return string;
     }
 
@@ -283,6 +278,7 @@ function App() {
                     </Button>
                 </div>
             </Modal>
+
         </>
     );
 }
