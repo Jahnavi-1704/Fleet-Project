@@ -211,7 +211,9 @@ function App() {
               <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '10px'}} className="Card">
                   {searchData.map((company, i) => (
                       <Card onClick={() => onClick(i)}
-                            style={{width: '18rem', margin: '10px', borderRadius: '5%', paddingTop: 15, paddingLeft: 15, flex: '0 0 500px'}}>
+                            style={{width: '18rem', margin: '10px', borderRadius: '5%', paddingTop: 15, paddingLeft: 15, flex: '0 0 500px'}}
+                            className="single-content"
+                      >
                           <Card.Img variant="top" src={company.icon} style={{borderRadius: '20%', width: '5rem', padding: 5}} />
                           <Card.Body>
                               <Card.Title style={{fontWeight: 'bold'}}>{company.name}</Card.Title>
