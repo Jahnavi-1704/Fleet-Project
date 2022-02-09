@@ -14,6 +14,7 @@ const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 
+// connecting to MongoDB
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
@@ -120,7 +121,7 @@ const Company = mongoose.model('Company', companySchema);
 
 // function to initialize the DB if not previously done
 function initializer() {
-    console.log('inside initializer()');
+    // console.log('inside initializer()');
 
     Company.find({})
         .then(data => {
@@ -142,9 +143,9 @@ function initializer() {
         })
 }
 
-// API to get the entire data about all companies
+// REST API to get the data about all companies
 app.route('/companies').get((req, res) => {
-    console.log('get is called');
+    // console.log('parsing get request');
 
     Company.find()
         .then(companies => res.json(companies))
@@ -154,24 +155,17 @@ app.route('/companies').get((req, res) => {
         });
 });
 
-// API to get information about a particular company-------------- won't need this
-app.route('/companies/:companyName').get((req, res) => {
-    const companyName = req.params.companyName;
-    Company.findOne( {name:companyName} )
-        .then(foundCompany => res.json(foundCompany))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-// API to update information about a company in all instances
+// REST API to update information about a company in all instances
 app.route('/companies/:companyName').put (async (req, res) => {
+    // console.log('parsing put request');
 
+    let name = req.params.companyName.substring(1);
     let updatedWebsite = req.body.website;
     let updatedDesc = req.body.description;
 
-    let name = req.params.companyName.substring(1);
-    console.log('to update companies with name: ' + name);
-    console.log('new website: ' + updatedWebsite);
-    console.log('new description: ' + updatedDesc);
+    // console.log('to update companies with name: ' + name);
+    // console.log('new website: ' + updatedWebsite);
+    // console.log('new description: ' + updatedDesc);
 
     const hello = await Company.updateMany({name: {$eq: name}}, { website: updatedWebsite, description: updatedDesc } );
     console.log(hello.matchedCount);
