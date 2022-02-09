@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Card, Button, OverlayTrigger, Modal} from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 
 // All the frontend code of the app lies here
 function App() {
@@ -196,15 +198,13 @@ function App() {
               <p>Available Services</p>
           </div>
 
-          <div style={{paddingRight: 180, paddingLeft: 190, flex: 1}}>
-              <input className="form-control border-secondary py-2" type="search"
+          <div style={{paddingRight: 190, paddingLeft: 190}}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="first" style={{fontSize: 24, color: '#808080'}}/>
+              <input className="form-control form-control-lg border-secondary py-2 second" type="search"
                      placeholder="Search for a specific service"
                      onChange={updateSearch}
                      style={{backgroundColor: '#f6f5f4'}}
               />
-              <div style={{fontSize: '24px' , color: 'red'}}>
-                  <p><i className="fa fa-search"></i></p>
-              </div>
           </div>
 
           {searchValue ?

@@ -6,8 +6,18 @@
   background-color: #dcdcdc;
 }
 
-.Card card:hover{
-  background-color: rgba(0,0,0,0.5);
+.first {
+  position: absolute;
+  margin-left: 1470px;
+  margin-top: 10px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.second {
+  padding-left: 50px;
+  height: 20px;
 }
 
 .App-logo {
