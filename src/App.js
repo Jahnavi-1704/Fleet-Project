@@ -1,26 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
-import "bootstrap/dist/css/bootstrap.min.css";
-import {Card, Button, OverlayTrigger, Modal} from "react-bootstrap";
+import {Card, Button, Modal} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-// All the frontend code of the app lies here
+// All the frontend code of the app is in this file
 function App() {
 
     const [data, setData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [name, setName] = useState(null);
-    const [website, setWebsite] = useState(null);
-    const [description, setDescription] = useState(null);
+    const [name, setName] = useState(null);                // to show in modal
+    const [website, setWebsite] = useState(null);          // to show in modal
+    const [description, setDescription] = useState(null);  // to show in modal
     const [searchValue, setSearchValue] = useState(null);
     const [searchData, setSearchData] = useState([]);
 
     useEffect(() => {
         console.log('inside componentDidMount()');
+
+        // fetch the data when the app starts
         getData();
     }, []);
 
+    // this function makes a GET request to backend
     const getData = async () => {
         console.log('inside getData()');
         let fetchedData;
@@ -36,14 +39,15 @@ function App() {
             })
             .catch(err => console.log('error fetching data: '+ err));
 
-        // combine the repeated instances of company into single instance
         groupData(fetchedData, fetchedData.length);
     }
 
+    // this function combines the repeated instances of a company into a single instance
+    // by merging their modeTypes
     const groupData = (list, length) => {
         console.log('inside groupData()');
-        console.log('before grouping length is: ' + length);
 
+        // console.log('before grouping length is: ' + length);
         // console.log('is data an array of objs? : ' + Array.isArray(list));
 
         let index = list.findIndex((element) => element.name == 'Wheels');
@@ -74,13 +78,15 @@ function App() {
 
         setData(newArray);
 
-        console.log('grouped data is now: ' + newArray);
-        console.log('after grouping length is: ' + newArray.length);
+        // console.log('grouped data is now: ' + newArray);
+        // console.log('after grouping length is: ' + newArray.length);
     }
 
+    // this function updates the state variables when user clicks a card
+    // and opens the details modal
     const onClick = (index) => {
-        console.log('Card was clicked');
-        console.log(index);
+        // console.log('Card was clicked');
+        // console.log(index);
 
         setWebsite(data[index].website);
         setDescription(data[index].description);
@@ -89,15 +95,17 @@ function App() {
         setModalOpen(true);
     }
 
+    // this function closes the open details modal
     const handleModalClose = () => setModalOpen(false);
 
+    // this function makes a PUT request to backend to update details of a company
     const onUpdate = async () => {
         console.log('inside onUpdate()');
         let url = 'http://localhost:5000/companies/:' + name;
 
-        console.log('company is: ' + name);
-        console.log('new website is: ' + website);
-        console.log('new desc is: ' + description);
+        // console.log('company is: ' + name);
+        // console.log('new website is: ' + website);
+        // console.log('new desc is: ' + description);
 
         handleModalClose();
 
@@ -115,32 +123,40 @@ function App() {
             .then(json =>  console.log(json))
             .catch(err => console.log('error updating data: '+ err));
 
-        // fetch the updated data from DB to display
+        // finally, fetch the updated data from DB to display
         getData();
     }
 
+    // this function updates the state variable website with user input
     const updateWebsite = (event) => {
         console.log(event.target.value);
         setWebsite(event.target.value);
     }
 
+    // this function updates the state variable description with user input
     const updateDescription = (event) => {
         console.log(event.target.value);
         setDescription(event.target.value);
     }
 
+    // this function updates the state variable searchValue with user input
+    // and calls the search function
     const updateSearch = (event) => {
         console.log(event.target.value);
         setSearchValue(event.target.value);
         search(event.target.value);
     }
 
+    // this function filters out the data to be displayed based on the search value
+    // set by the user. It searches in both company Name and the mode Type
     const search = (value) => {
         console.log('inside search()');
-        console.log('value to search is: ' + value);
+        // console.log('value to search is: ' + value);
 
         let searchArray = data.filter((element) => {
 
+            // first we convert to lowercase both strings we want to compare so that to ensure we
+            // are not leaving out objects just because of case related issues
             let lowerName = element.name.toLowerCase();
             let lowerValue = value.toLowerCase();
             if(lowerName.includes(lowerValue))
@@ -159,11 +175,18 @@ function App() {
 
         });
 
-        console.log(searchArray);
-        console.log(data);
+        // console.log(searchArray);
+        // console.log(data);
+
+        // Here I initially was doing setData(searchArray) but the issue was
+        // the array was displaying correctly in the console but on the browser nothing showed up.
+        // So, as an alternative I am now using this new state variable called searchData.
+        // And in the render part, I am displaying either data or searchData based on if the searchValue is set by user
         setSearchData(searchArray);
     }
 
+    // this function separates the elements of modeType array with commas
+    // for display purposes
     const modeTypeSeparator = (modeType) => {
         console.log('inside modeTypeSeparator()');
         // console.log('combined string is: ' + modeType);
@@ -269,6 +292,7 @@ function App() {
                         />
                     </div>
                 </Modal.Body>
+
                 <div style={{flex: 1, paddingLeft: 555, marginBottom: 15}}>
                     <Button style={{margin: 13, borderRadius: 7, borderColor: '#5D3FD3', borderWidth: 2, backgroundColor: '#FFFFFF', color: '#5D3FD3'}} size='lg' onClick={handleModalClose}>
                         Close
@@ -277,6 +301,7 @@ function App() {
                         Update
                     </Button>
                 </div>
+
             </Modal>
 
         </>
