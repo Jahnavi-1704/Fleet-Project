@@ -1,23 +1,23 @@
-.App {
-  text-align: center;
-}
-
 .single-content:hover {
-  background-color: #dcdcdc;
+  background-color: #e9d8f2;
 }
 
-.first {
+.icon {
   position: absolute;
-  margin-left: 1470px;
+  margin-left: 1490px;
   margin-top: 10px;
   height: 25px;
   display: flex;
   align-items: center;
 }
 
-.second {
+.searchField {
   padding-left: 50px;
   height: 20px;
+}
+
+.App {
+  text-align: center;
 }
 
 .App-logo {
