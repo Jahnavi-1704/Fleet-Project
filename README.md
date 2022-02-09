@@ -1,11 +1,11 @@
 # This is my Fleet project
 
-## I built it using the following Tech stack - 
+## Tech stack - 
          1. React for Frontend (Additionally, used BootStrap 4 and FontAwesomeIcon for styling)
          2. Node and Express for Backend
          3. MongoDB as Database
          
-## Summary of what the app does:
+## Summary of App:
          - There is some JSON data about companies stored in the database in the 'companies' schema
          - On loading, the frontend makes a GET request to backend API to fetch the data stored
          - The frontend then groups the data by company name and displays it to user in the form of cards
